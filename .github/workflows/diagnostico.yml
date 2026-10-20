@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ver o que o token do workflow consegue fazer
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo "== token =="
           echo "GITHUB_TOKEN length: ${#GITHUB_TOKEN}"
