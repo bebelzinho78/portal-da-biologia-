@@ -10,7 +10,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  administration: write
+  actions: write
 
 jobs:
   diag:
