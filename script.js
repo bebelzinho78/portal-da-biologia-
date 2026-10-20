@@ -26,6 +26,11 @@ function icone(nome, classe = 'icone-svg') {
   return `<svg viewBox="0 0 24 24" aria-hidden="true" class="${classe}">${caminho}</svg>`;
 }
 
+/** Ícones usados dentro do próprio script (instalação do app, etc.). */
+const ICONES_APP = {
+  instalar: `<path d="M12 3v12M12 15l-4-4M12 15l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>`
+};
+
 /** Converte "hh:mm:ss" em texto legível ("3 dias atrás"). */
 function dataRelativa(ts) {
   if (!ts) return '';
@@ -58,6 +63,9 @@ const PROGRESSO_PADRAO = {
 };
 
 let progresso = carregarProgresso();
+
+/* Evento de instalação do PWA (preenchido pelo navegador quando disponível). */
+let promptInstalacao = null;
 
 function carregarProgresso() {
   let bruto = null;
@@ -184,6 +192,7 @@ function renderizar() {
 
   marcarLinkAtivo(rota.nome);
   atualizarIndicadoresProgresso();
+  atualizarBotoesInstalar();
   fecharMenuMobile();
   window.scrollTo({ top: 0, behavior: 'auto' });
 
@@ -244,6 +253,10 @@ function vistaInicio() {
       <div class="hero__acoes">
         <a class="botao botao--claro" href="#/conteudos">Começar a estudar</a>
         <a class="botao botao--fantasma" href="#/quiz">${icone('microbio')} Fazer um quiz</a>
+        <button type="button" class="botao botao--fantasma" data-acao="instalar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg">${ICONES_APP.instalar}</svg>
+          Instalar o aplicativo
+        </button>
       </div>
       <div class="hero__destaques">
         <div class="hero__destaque"><strong>${CONTEUDOS.length}</strong><span>assuntos disponíveis</span></div>
@@ -899,14 +912,57 @@ function vistaSobre() {
            arquivos são estáticos, o que permite publicá-lo gratuitamente no GitHub Pages. A interface é
            responsiva, funciona por teclado, possui descrições alternativas para os diagramas e respeita
            a preferência do sistema por tema claro ou escuro.</p>
-        <p>Para instalar o portal como aplicativo, abra o site no navegador do celular ou do computador e
-           use a opção de instalação. O Service Worker guarda os arquivos essenciais no dispositivo para
-           que os estudos continuem mesmo sem internet.</p>
+
+        <h2 id="titulo-instalacao">Instalar o aplicativo no celular ou no computador</h2>
+        <p>O portal é um <strong>PWA</strong>: pode ser instalado como um aplicativo comum, com ícone
+           próprio, abrindo em tela cheia e funcionando sem internet.</p>
+        <div class="bloco-instalacao" id="instrucoes-instalacao">
+          <div class="bloco-instalacao__passo">
+            <h3>No Chrome do celular (Android)</h3>
+            <ol class="lista-simples">
+              <li>Abra o endereço do portal no Chrome.</li>
+              <li>Toque no botão de <strong>Instalar</strong> que aparece no topo do portal
+                  (ou no menu do Chrome, em <em>⋮ → Instalar aplicativo</em>).</li>
+              <li>Confirme em <strong>Instalar</strong>. O ícone do Portal de Biologia passa a ficar
+                  na tela inicial, junto dos outros aplicativos.</li>
+            </ol>
+          </div>
+          <div class="bloco-instalacao__passo">
+            <h3>No Chrome ou Edge do computador</h3>
+            <ol class="lista-simples">
+              <li>Abra o endereço do portal.</li>
+              <li>Clique no ícone de <strong>instalar</strong> que aparece na barra de endereço
+                  (um monitor com uma seta) ou em <em>⋮ → Salvar e compartilhar → Instalar página
+                  como aplicativo</em>.</li>
+              <li>O portal será aberto em uma janela própria, com o ícone do DNA.</li>
+            </ol>
+          </div>
+          <div class="bloco-instalacao__passo">
+            <h3>No Safari do iPhone/iPad</h3>
+            <ol class="lista-simples">
+              <li>Abra o endereço do portal.</li>
+              <li>Toque no botão <strong>Compartilhar</strong> (quadro com a seta para cima).</li>
+              <li>Escolha <strong>Adicionar à Tela de Início</strong> e confirme em <strong>Adicionar</strong>.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="aviso aviso--info">
+          ${icone('lampada')}
+          <div><strong>Depois da primeira visita, o portal continua funcionando sem internet.</strong>
+          <p style="margin:.2rem 0 0">O Service Worker do navegador guarda os arquivos essenciais no
+             dispositivo. Recomenda-se abrir o portal pelo menos uma vez com a internet ligada para que
+             o conteúdo fique disponível offline.</p></div>
+        </p>
 
         <h2>Privacidade</h2>
         <p>O portal não solicita cadastro, e-mail, senha ou qualquer dado pessoal. Nenhuma informação é
            enviada para servidores externos. O único dado gravado é o seu progresso de estudos, guardado
            no armazenamento local do navegador, neste dispositivo.</p>
+
+        <h2>Créditos</h2>
+        <p class="creditos"><span class="rodape__rotulo">Portal de Biologia — criado por</span>
+           <strong>Ismael Anderson</strong><br>
+           <span>Projeto educacional da Escola Estadual Professor Abel Freire Coelho, Mossoró/RN.</span></p>
       </article>
 
       <div class="acoes-assunto">
@@ -1071,11 +1127,72 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-/* ---- aviso de instalação (PWA) ---- */
-let promptInstalacao = null;
+/* ---- instalação do aplicativo (PWA) ------------------------------------ */
+
+/** Exibe ou oculta os botões de instalação conforme o suporte do navegador. */
+function atualizarBotoesInstalar() {
+  const botoes = $$('[data-acao="instalar"]');
+  const instalado = rodandoInstalado();
+  botoes.forEach((botao) => {
+    if (instalado) { botao.hidden = true; return; }
+    if (promptInstalacao) { botao.hidden = false; return; }
+    // Sem prompt nativo: mantemos o botão visível para abrir as instruções.
+    if (botao.dataset.acao === 'instalar') botao.hidden = false;
+  });
+}
+
+/** Executa a instalação ou abre as instruções manuais. */
+async function instalarApp() {
+  if (rodandoInstalado()) return;
+
+  if (promptInstalacao) {
+    promptInstalacao.prompt();
+    try {
+      await promptInstalacao.userChoice;
+    } catch (erro) {
+      console.warn('Instalação cancelada:', erro);
+    }
+    promptInstalacao = null;
+    atualizarBotoesInstalar();
+    return;
+  }
+
+  // Navegador sem suporte ao prompt (ou já instalado): mostra as instruções.
+  const instrucoes = $('#instrucoes-instalacao');
+  if (instrucoes) {
+    irPara('sobre');
+    setTimeout(() => {
+      const bloco = $('#instrucoes-instalacao');
+      if (bloco) {
+        bloco.hidden = false;
+        bloco.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        bloco.setAttribute('tabindex', '-1');
+        bloco.focus({ preventScroll: true });
+      }
+    }, 120);
+  }
+}
+
+/** Indica se o portal já está rodando como aplicativo instalado. */
+function rodandoInstalado() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
 window.addEventListener('beforeinstallprompt', (evento) => {
   evento.preventDefault();
   promptInstalacao = evento;
-  const botao = $('#botaoInstalar');
-  if (botao) botao.hidden = false;
+  atualizarBotoesInstalar();
+});
+
+window.addEventListener('appinstalled', () => {
+  promptInstalacao = null;
+  atualizarBotoesInstalar();
+});
+
+// delegação: qualquer elemento com data-acao="instalar" dispara a instalação
+document.addEventListener('click', (evento) => {
+  const alvo = evento.target.closest('[data-acao="instalar"]');
+  if (!alvo) return;
+  evento.preventDefault();
+  instalarApp();
 });

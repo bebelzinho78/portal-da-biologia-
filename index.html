@@ -41,6 +41,10 @@
       </a>
 
       <div class="cabecalho__acoes">
+        <button type="button" class="botao-instalar" id="botaoInstalar" data-acao="instalar" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M12 3v12M12 15l-4-4M12 15l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <span>Instalar</span>
+        </button>
         <span class="selo-progresso" id="seloProgresso" title="Progresso geral dos estudos">
           <span class="selo-progresso__barra" aria-hidden="true"><span id="seloProgressoPreenchimento"></span></span>
           <span class="selo-progresso__texto" id="seloProgressoTexto">0%</span>
@@ -133,10 +137,11 @@
         <span>Portal de Biologia · projeto educacional de estudo e revisão para o Ensino Médio.</span>
       </p>
     </div>
-    <p>
-      Todo o conteúdo fica salvo apenas neste dispositivo.<br>
-      Nenhum dado pessoal é coletado ou enviado a servidores.
-    </p>
+    <div class="rodape__credito">
+      <p class="rodape__criador"><span class="rodape__rotulo">Criado por</span> <strong>Ismael Anderson</strong></p>
+      <p>Todo o conteúdo fica salvo apenas neste dispositivo.<br>
+         Nenhum dado pessoal é coletado ou enviado a servidores.</p>
+    </div>
   </footer>
 
   <!-- ============================== ÍCONES SVG REUTILIZÁVEIS (sprite interno) -->

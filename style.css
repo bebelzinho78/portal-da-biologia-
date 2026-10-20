@@ -413,6 +413,30 @@ svg.icone-svg {
 .botao--principal:hover { background: var(--verde-700); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(26, 149, 64, .38); }
 .botao--fantasma { background: rgba(255, 255, 255, .16); color: #fff; border-color: rgba(255, 255, 255, .5); backdrop-filter: blur(4px); }
 .botao--fantasma:hover { background: rgba(255, 255, 255, .28); transform: translateY(-2px); }
+
+/* botão de instalação do app (PWA) */
+.botao-instalar {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .45rem .85rem; min-height: 38px;
+  border-radius: var(--raio-cheio); border: 1px solid var(--verde-600);
+  background: var(--verde-600); color: #fff;
+  font: inherit; font-size: .85rem; font-weight: 700;
+  cursor: pointer; transition: background var(--transicao), transform var(--transicao);
+}
+.botao-instalar[hidden] { display: none; }
+.botao-instalar:hover { background: var(--verde-700); transform: translateY(-1px); }
+.botao-instalar .icone-svg { width: 1.05em; height: 1.05em; }
+
+/* bloco de instruções de instalação */
+.bloco-instalacao {
+  display: grid; gap: var(--espaco-4);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  background: var(--cor-superficie-2); border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-p); padding: var(--espaco-4); margin: var(--espaco-4) 0;
+}
+.bloco-instalacao[hidden] { display: none; }
+.bloco-instalacao h3 { font-size: .98rem; margin: 0 0 var(--espaco-2); color: var(--cor-destaque); }
+.bloco-instalacao ol { font-size: .9rem; color: var(--cor-texto-suave); padding-left: 1.15rem; display: grid; gap: .35rem; }
 .botao--claro { background: rgba(255, 255, 255, .95); color: var(--verde-800); }
 .botao--claro:hover { background: #fff; transform: translateY(-2px); }
 .botao--contorno { background: transparent; color: var(--cor-destaque); border-color: var(--cor-borda-forte); }
@@ -819,6 +843,14 @@ a.cartao-assunto:hover p, a.cartao-assunto:hover h3 { text-decoration: none; }
 .rodape__escola { display: flex; gap: var(--espaco-3); align-items: center; max-width: 46ch; }
 .rodape__escola p { margin: 0; line-height: 1.5; }
 .rodape__escola strong { color: var(--cor-texto); }
+.rodape__credito { text-align: right; }
+.rodape__credito p { margin: 0 0 .3rem; line-height: 1.5; }
+.rodape__criador { font-size: 1rem; color: var(--cor-texto); }
+.rodape__rotulo {
+  display: inline-block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--cor-texto-fraco); margin-right: .25rem;
+}
+.rodape__criador strong { color: var(--cor-destaque); font-weight: 700; }
 .rodape__brasao {
   flex: none; width: 54px; height: auto; border-radius: 6px;
   background: #fff; border: 1px solid var(--cor-borda); padding: 3px;
