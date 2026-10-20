@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Portal de Biologia — Escola Estadual Prof. Abel Freire Coelho</title>
+  <meta name="description" content="Portal de Biologia da Escola Estadual Professor Abel Freire Coelho (Mossoró/RN) para estudantes do Ensino Médio: conteúdos explicados, diagramas educativos, quizzes e acompanhamento de progresso. Funciona offline e pode ser instalado como aplicativo.">
+  <meta name="theme-color" content="#13346a">
+  <meta name="color-scheme" content="light dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Biologia">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+
+  <script src="./data.js" defer></script>
+  <script src="./conteudos.js" defer></script>
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <a class="pular-para-conteudo" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+  <!-- ============================================================ CABEÇALHO -->
+  <header class="cabecalho" role="banner">
+    <div class="cabecalho__interno">
+      <button type="button" class="botao-menu" id="botaoMenu" aria-expanded="false" aria-controls="menuLateral" aria-label="Abrir menu de navegação">
+        <span class="botao-menu__barras" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="botao-menu__texto">Menu</span>
+      </button>
+
+      <a class="marca" href="#/inicio" aria-label="Portal de Biologia, ir para o início">
+        <img class="marca__logo" src="./icon.svg" alt="" width="40" height="40">
+        <span class="marca__texto">
+          <strong class="marca__nome">Portal de Biologia</strong>
+          <span class="marca__sub">Escola Estadual Prof. Abel Freire Coelho — Mossoró/RN</span>
+        </span>
+      </a>
+
+      <div class="cabecalho__acoes">
+        <button type="button" class="botao-instalar" id="botaoInstalar" data-acao="instalar" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M12 3v12M12 15l-4-4M12 15l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <span>Instalar</span>
+        </button>
+        <span class="selo-progresso" id="seloProgresso" title="Progresso geral dos estudos">
+          <span class="selo-progresso__barra" aria-hidden="true"><span id="seloProgressoPreenchimento"></span></span>
+          <span class="selo-progresso__texto" id="seloProgressoTexto">0%</span>
+        </span>
+        <button type="button" class="botao-icone" id="botaoTema" aria-label="Alternar tema claro e escuro" title="Alternar tema claro e escuro">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg" id="iconeTema"><use href="#icone-tema"></use></svg>
+        </button>
+        <a class="botao-icone" href="#/revisao" aria-label="Ir para a revisão do progresso" title="Revisão do progresso">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M4 20h16"/><path d="M7 20v-6M12 20V7M17 20v-9"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================================================== AVISO DE OFFLINE -->
+  <div class="faixa-offline" id="faixaOffline" role="status" aria-live="polite" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.2v.1"/></svg>
+    <span>Você está sem conexão. O conteúdo já salvo no dispositivo continua disponível.</span>
+  </div>
+
+  <!-- ============================================================== LAYOUT -->
+  <div class="layout">
+    <!-- ---------------------------------------------------------- MENU LATERAL -->
+    <div class="fundo-menu" id="fundoMenu" hidden></div>
+    <aside class="menu-lateral" id="menuLateral" aria-label="Menu principal" aria-hidden="true">
+      <nav class="menu-lateral__nav">
+        <p class="menu-lateral__titulo">Navegue</p>
+        <ul class="lista-menu" id="listaMenu">
+          <li><a class="item-menu" href="#/inicio" data-rota="inicio">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M3 11 12 4l9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>
+            <span>Início</span></a></li>
+          <li><a class="item-menu" href="#/conteudos" data-rota="conteudos">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H19v5H6.5A2.5 2.5 0 0 1 4 18.5z"/></svg>
+            <span>Conteúdos</span></a></li>
+          <li><a class="item-menu" href="#/quiz" data-rota="quiz">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M9.2 9a3 3 0 1 1 3.9 2.8c-.8.3-1.1.9-1.1 1.7v.5"/><path d="M12 17.5v.1"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Quiz</span></a></li>
+          <li><a class="item-menu" href="#/revisao" data-rota="revisao">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M4 19h16"/><path d="M6 16V8M10 16V5M14 16v-6M18 16v-9"/></svg>
+            <span>Revisão</span></a></li>
+          <li><a class="item-menu" href="#/sobre" data-rota="sobre">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.1"/></svg>
+            <span>Sobre</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="menu-lateral__rodape">
+        <div class="mini-progresso">
+          <p class="mini-progresso__titulo">Seu progresso</p>
+          <div class="barra-progresso" role="img" aria-label="Progresso geral dos estudos" id="barraProgressoMenu">
+            <span class="barra-progresso__preenchimento" id="preenchimentoMenu"></span>
+          </div>
+          <p class="mini-progresso__texto" id="textoProgressoMenu">0 de 10 assuntos concluídos</p>
+        </div>
+        <p class="menu-lateral__nota">Progresso salvo apenas neste dispositivo.</p>
+      </div>
+    </aside>
+
+    <!-- ---------------------------------------------------------------- MAIN -->
+    <main class="conteudo" id="conteudo-principal" tabindex="-1">
+      <div id="app" class="app"></div>
+    </main>
+  </div>
+
+  <!-- ====================================================== NAVEGAÇÃO INFERIOR -->
+  <nav class="navegacao-inferior" aria-label="Navegação principal">
+    <a class="item-inferior" href="#/inicio" data-rota="inicio">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M3 11 12 4l9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>
+      <span>Início</span></a>
+    <a class="item-inferior" href="#/conteudos" data-rota="conteudos">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H19v5H6.5A2.5 2.5 0 0 1 4 18.5z"/></svg>
+      <span>Conteúdos</span></a>
+    <a class="item-inferior" href="#/quiz" data-rota="quiz">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M9.2 9a3 3 0 1 1 3.9 2.8c-.8.3-1.1.9-1.1 1.7v.5"/><path d="M12 17.5v.1"/><circle cx="12" cy="12" r="9"/></svg>
+      <span>Quiz</span></a>
+    <a class="item-inferior" href="#/revisao" data-rota="revisao">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><path d="M4 19h16"/><path d="M6 16V8M10 16V5M14 16v-6M18 16v-9"/></svg>
+      <span>Revisão</span></a>
+    <a class="item-inferior" href="#/sobre" data-rota="sobre">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="icone-svg"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.1"/></svg>
+      <span>Sobre</span></a>
+  </nav>
+
+  <footer class="rodape" role="contentinfo">
+    <div class="rodape__escola">
+      <img class="rodape__brasao" src="./assets/brasao-escola.svg" alt="Brasão da Escola Estadual Professor Abel Freire Coelho" width="54" height="32">
+      <p>
+        <strong>Escola Estadual Professor Abel Freire Coelho</strong><br>
+        Rua Doutor João Marcelino, s/n — Abolição, Mossoró/RN — CEP 59612-200<br>
+        <span>Portal de Biologia · projeto educacional de estudo e revisão para o Ensino Médio.</span>
+      </p>
+    </div>
+    <div class="rodape__credito">
+      <p class="rodape__criador"><span class="rodape__rotulo">Criado por</span> <strong>Ismael Anderson</strong></p>
+      <p>Todo o conteúdo fica salvo apenas neste dispositivo.<br>
+         Nenhum dado pessoal é coletado ou enviado a servidores.</p>
+    </div>
+  </footer>
+
+  <!-- ============================== ÍCONES SVG REUTILIZÁVEIS (sprite interno) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icone-tema" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4.2"/>
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/>
+    </symbol>
+    <symbol id="icone-seta" viewBox="0 0 24 24">
+      <path d="M5 12h14M13 6l6 6-6 6"/>
+    </symbol>
+    <symbol id="icone-check" viewBox="0 0 24 24">
+      <path d="M4 12.5 9 17.5 20 6.5"/>
+    </symbol>
+    <symbol id="icone-lampada" viewBox="0 0 24 24">
+      <path d="M9 18h6M10 21h4"/>
+      <path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5.9 1.1 1 1.7h5.2c.1-.6.4-1.2 1-1.7A6 6 0 0 0 12 3z"/>
+    </symbol>
+  </svg>
+</body>
+</html>
