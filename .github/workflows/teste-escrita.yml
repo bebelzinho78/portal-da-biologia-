@@ -13,6 +13,10 @@ jobs:
   teste:
     runs-on: ubuntu-latest
     steps:
+      - name: Fazer checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Verificar se o token consegue escrever
         env:
           GH_TOKEN: ${{ github.token }}
