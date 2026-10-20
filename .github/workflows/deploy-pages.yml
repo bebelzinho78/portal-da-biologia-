@@ -1,11 +1,12 @@
-name: Publicar no GitHub Pages
+name: Publicar no GitHub Pages (Actions)
 
+# Alternativa à publicação pela branch gh-pages.
+# Ative em: Settings > Pages > Build and deployment > Source: "GitHub Actions"
+# e depois execute este workflow manualmente (Actions > Publicar no GitHub Pages
+# > Run workflow).
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
-# Permissões necessárias para publicar no GitHub Pages
 permissions:
   contents: read
   pages: write

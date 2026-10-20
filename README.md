@@ -15,7 +15,7 @@ disponível mesmo sem internet.
 ```
 index.html              estrutura principal da aplicação
 style.css               estilos, paleta da escola, temas claro/escuro e responsividade
-script.js               navegação por rotas, quizzes, progresso, tema e modo offline
+script.js               navegação por rotas, quizzes, progresso, tema e instalação do app
 data.js                 ícones SVG e os 10 diagramas educativos (SVG desenhado à mão)
 conteudos.js            todo o conteúdo dos assuntos e as questões dos quizzes
 manifest.json           configuração da PWA (nome, ícones, atalhos, modo standalone)
@@ -28,24 +28,68 @@ icon-maskable-192.png   versão "maskable" 192×192
 icon-maskable-512.png   versão "maskable" 512×512
 assets/brasao-escola.svg  brasão da escola em formato vetorial
 assets/brasao-escola.png  brasão da escola em PNG
+.github/workflows/      publicação automática no GitHub Pages
 ```
+
+## Identidade visual
+
+A paleta foi extraída do **brasão oficial da Escola Estadual Professor Abel Freire Coelho**:
+
+| Cor | Hex | Uso |
+| --- | --- | --- |
+| Verde | `#22b14c` | cor principal, botões e destaques |
+| Ciano | `#00a2e8` | secundária, links e diagramas |
+| Índigo | `#3f48cc` | acentos dos assuntos |
+| Amarelo | `#fff200` | detalhes e destaques |
+| Azul-marinho | `#13346a` | texto, títulos e tema do navegador |
+| Vermelho | `#d12920` | erros e alertas |
+
+O brasão está **hospedado dentro do próprio repositório** (`assets/brasao-escola.svg`),
+sem depender de nenhum servidor externo.
 
 ## Publicação no GitHub Pages
 
 Todos os caminhos do projeto são **relativos**, então o portal funciona tanto na raiz de
-um domínio quanto dentro de um subdiretório (por exemplo `https://usuario.github.io/repositorio/`).
+um domínio quanto dentro de um subdiretório (por exemplo
+`https://usuario.github.io/repositorio/`).
 
-1. Envie os arquivos para a branch `main`:
-   ```bash
-   git add .
-   git commit -m "Portal de Biologia"
-   git push origin main
+O repositório já tem uma branch **`gh-pages`** com todos os arquivos do portal e um
+workflow (`.github/workflows/sincronizar-gh-pages.yml`) que mantém essa branch
+atualizada a cada `push` na `main`.
+
+### Ativar a publicação (1 passo, só na primeira vez)
+
+1. No repositório, abra **Settings → Pages**.
+2. Em **Build and deployment → Source**, escolha **Deploy from a branch**.
+3. Em **Branch**, selecione **`gh-pages`** e a pasta **`/(root)`**.
+4. Salve. Em menos de um minuto o GitHub publica o portal em:
+
    ```
-2. No repositório, abra **Settings → Pages** e escolha *Deploy from a branch*,
-   com a branch `main` e a pasta `/ (root)`.
-3. Em poucos minutos o portal fica disponível no endereço informado pelo GitHub.
+   https://bebelzinho78.github.io/portal-da-biologia-/
+   ```
 
-Depois de alterar arquivos já publicados, increases a versão do cache em
+Depois disso, **cada `git push` na `main` atualiza o site automaticamente**,
+sem nenhuma ação manual.
+
+<details>
+<summary>Alternativa: publicar pelo GitHub Actions</summary>
+
+Se preferir a opção **GitHub Actions** em *Settings → Pages → Source*, use o
+workflow `.github/workflows/deploy-pages.yml`. Nesse caso, rode-o manualmente em
+**Actions → Publicar no GitHub Pages (Actions) → Run workflow**.
+</details>
+
+### Enviar alterações
+
+```bash
+git add .
+git commit -m "Portal de Biologia"
+git push origin main
+```
+
+### Atualizar o Service Worker após mudanças grandes
+
+Ao alterar a estrutura dos arquivos, increases a versão do cache em
 `service-worker.js` (`const VERSAO_CACHE = 'portal-biologia-v1';`) para que os
 estudantes recebam a versão nova.
 

@@ -1,0 +1,53 @@
+name: Sincronizar a branch gh-pages
+
+# Mantém a branch `gh-pages` com os arquivos do portal, para publicação no
+# GitHub Pages a partir da branch (Settings > Pages > Deploy from a branch).
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: true
+
+jobs:
+  sincronizar:
+    name: Atualizar a branch gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fazer checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Montar os arquivos do portal na branch gh-pages
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout --orphan gh-pages-temp
+          git rm -rf . --quiet || true
+
+          # arquivos estritos do portal
+          cp index.html style.css script.js data.js conteudos.js \
+             manifest.json service-worker.js \
+             icon.svg icon-maskable.svg \
+             icon-192.png icon-512.png icon-maskable-192.png icon-maskable-512.png .
+          mkdir -p assets
+          cp assets/brasao-escola.svg assets/brasao-escola.png assets/
+
+          # .nojekyll evita que o GitHub Pages processe a pasta com underscore
+          touch .nojekyll
+
+          git add -A
+          git commit -m "Atualiza o portal na branch gh-pages"
+          git branch -f gh-pages gh-pages-temp
+          git checkout --orphan gh-pages
+          git reset --hard gh-pages
+          git push --force origin gh-pages
+          git branch -D gh-pages-temp
