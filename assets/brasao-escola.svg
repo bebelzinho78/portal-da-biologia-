@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197 116" width="197" height="116"
+     role="img" aria-labelledby="titulo-brasao desc-brasao">
+  <title id="titulo-brasao">Brasão da Escola Estadual Professor Abel Freire Coelho</title>
+  <desc id="desc-brasao">Brasão com listras horizontais azuis e amarelas nas laterais e um monograma
+    em azul-marinho e amarelo, com um círculo vermelho central.</desc>
+
+  <!-- fundo branco do brasao -->
+  <rect x="2" y="1" width="193" height="114" fill="#ffffff"/>
+
+  <!-- listras da coluna esquerda -->
+  <g fill="#13346a"><rect x="7" y="5" width="32" height="11"/></g>
+  <g fill="#0564a8"><rect x="7" y="27" width="32" height="11"/></g>
+  <g fill="#fff200"><rect x="7" y="55" width="32" height="12"/></g>
+  <g fill="#0564a8"><rect x="7" y="79" width="32" height="11"/></g>
+  <g fill="#13346a"><rect x="7" y="103" width="32" height="11"/></g>
+
+  <!-- listras da coluna direita -->
+  <g fill="#13346a"><rect x="158" y="5" width="32" height="11"/></g>
+  <g fill="#0564a8"><rect x="158" y="27" width="32" height="11"/></g>
+  <g fill="#fff200"><rect x="158" y="55" width="32" height="12"/></g>
+  <g fill="#0564a8"><rect x="158" y="79" width="32" height="11"/></g>
+  <g fill="#13346a"><rect x="158" y="103" width="32" height="11"/></g>
+
+  <!-- contorno do monograma -->
+  <path fill="#13346a" d="M51 9H105c23 5 44 25 44 51s-21 46-44 51H51c-4-21-4-81 0-102z"/>
+
+  <!-- areas amarelas internas -->
+  <path fill="#fff200" d="M59 19h32v78H59c-4-19-4-59 0-78z"/>
+  <path fill="#fff200" d="M105 19h13c13 7 21 24 21 41s-8 34-21 41h-13z"/>
+
+  <!-- haste vertical central -->
+  <rect fill="#13346a" x="91" y="9" width="14" height="102"/>
+
+  <!-- circulo vermelho central -->
+  <circle fill="#13346a" cx="98" cy="60" r="14"/>
+  <circle fill="#d12920" cx="98" cy="60" r="9"/>
+</svg>
