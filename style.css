@@ -12,48 +12,48 @@
   /* ------------------------------------------------------------------
    * Paleta institucional da Escola Estadual Professor Abel Freire Coelho
    * (Mossoró - RN), extraída do brasão oficial da escola.
-   *   verde  #22b14c   ciano  #00a2e8   índigo #3f48cc
-   *   amarelo #fff200  marinho #13346a  azul  #0564a8   vermelho #d12920
+   *   verde  #2563eb   ciano  #00a2e8   índigo #1d4ed8
+   *   amarelo #ffd633  marinho #13346a  azul  #0564a8   vermelho #d12920
    * A paleta do portal combina essas cores com tons de Biologia.
    * ------------------------------------------------------------------ */
-  --verde-50:  #f0fdf4;
-  --verde-100: #dcfce7;
-  --verde-200: #bbf7d0;
-  --verde-300: #86efac;
-  --verde-400: #4ade80;
-  --verde-500: #22b14c;
-  --verde-600: #1a9540;
-  --verde-700: #157a35;
-  --verde-800: #106129;
+  --verde-50:  #eff6ff;
+  --verde-100: #dbeafe;
+  --verde-200: #bfdbfe;
+  --verde-300: #93c5fd;
+  --verde-400: #60a5fa;
+  --verde-500: #2563eb;
+  --verde-600: #1d4ed8;
+  --verde-700: #1e40af;
+  --verde-800: #1e3a8a;
 
   --teal-600:  #00a2e8;
   --teal-700:  #0087c2;
   --azul-600:  #0564a8;
   --azul-700:  #13346a;
-  --amarelo-500: #fff200;
-  --amarelo-600: #d9d100;
-  --lima-600:  #4d9e2a;
-  --roxo-600:  #3f48cc;
+  --amarelo-500: #ffd633;
+  --amarelo-600: #e6b800;
+  --lima-600:  #1d4ed8;
+  --roxo-600:  #1d4ed8;
   --rosa-600:  #d12920;
-  --laranja-600: #e07b00;
+  --laranja-600: #f2c500;
   --ciano-600: #00a2e8;
-  --magenta-600: #8e44ad;
+  --magenta-600: #3b82f6;
   --ambar-600:  #b8860b;
   --indigo-600: #13346a;
 
-  --cor-fundo: #f3f8f4;
-  --cor-fundo-alt: #e8f2ec;
+  --cor-fundo: #f4f8ff;
+  --cor-fundo-alt: #eaf2ff;
   --cor-superficie: #ffffff;
-  --cor-superficie-2: #f7fbf8;
+  --cor-superficie-2: #ffffff;
   --cor-texto: #0d2438;
   --cor-texto-suave: #3f5b6e;
   --cor-texto-fraco: #64798a;
-  --cor-borda: #d7e5e0;
-  --cor-borda-forte: #bcd3cc;
-  --cor-destaque: var(--verde-700);
+  --cor-borda: #d8e4f5;
+  --cor-borda-forte: #b5c9e8;
+  --cor-destaque: var(--azul-600);
   --cor-destaque-contraste: #ffffff;
-  --cor-sucesso: #157a35;
-  --cor-sucesso-fundo: #e8f8ee;
+  --cor-sucesso: #1e40af;
+  --cor-sucesso-fundo: #e8f1ff;
   --cor-erro: #b3261e;
   --cor-erro-fundo: #fdecea;
   --cor-aviso: #8a6d00;
@@ -96,10 +96,10 @@
   --cor-texto-fraco: #8aa5b7;
   --cor-borda: #24394a;
   --cor-borda-forte: #33506a;
-  --cor-destaque: var(--verde-400);
-  --cor-destaque-contraste: #06231a;
-  --cor-sucesso: #6ee7a0;
-  --cor-sucesso-fundo: #10331f;
+  --cor-destaque: #60a5fa;
+  --cor-destaque-contraste: #0b1f44;
+  --cor-sucesso: #93c5fd;
+  --cor-sucesso-fundo: #102b55;
   --cor-erro: #fca5a0;
   --cor-erro-fundo: #3a1c1c;
   --cor-aviso: #ffe95c;
@@ -114,13 +114,13 @@
   --dia-texto: #dcebf5;
   --dia-titulo: #f0f8fd;
   --dia-chamada: #4b6b82;
-  --dia-verde: #22b14c;
+  --dia-verde: #2563eb;
   --dia-azul: #00a2e8;
-  --dia-amarelo: #fff200;
+  --dia-amarelo: #ffd633;
   --dia-roxo: #6f7cf0;
   --dia-rosa: #d12920;
   --dia-cinza: #7d93a5;
-  --dia-laranja: #e07b00;
+  --dia-laranja: #f2c500;
 }
 
 :root {
@@ -130,13 +130,13 @@
   --dia-texto: #0d2438;
   --dia-titulo: #082033;
   --dia-chamada: #7f9aac;
-  --dia-verde: #22b14c;
+  --dia-verde: #2563eb;
   --dia-azul: #0564a8;
   --dia-amarelo: #f0d400;
-  --dia-roxo: #3f48cc;
+  --dia-roxo: #1d4ed8;
   --dia-rosa: #d12920;
   --dia-cinza: #64798a;
-  --dia-laranja: #e07b00;
+  --dia-laranja: #f2c500;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -150,10 +150,10 @@
     --cor-texto-fraco: #8aa5b7;
     --cor-borda: #24394a;
     --cor-borda-forte: #33506a;
-    --cor-destaque: var(--verde-400);
-    --cor-destaque-contraste: #06231a;
-    --cor-sucesso: #6ee7a0;
-    --cor-sucesso-fundo: #10331f;
+    --cor-destaque: #60a5fa;
+    --cor-destaque-contraste: #0b1f44;
+    --cor-sucesso: #93c5fd;
+    --cor-sucesso-fundo: #102b55;
     --cor-erro: #fca5a0;
     --cor-erro-fundo: #3a1c1c;
     --cor-aviso: #ffe95c;
@@ -370,7 +370,7 @@ svg.icone-svg {
   position: relative; overflow: hidden;
   background:
     radial-gradient(1100px 380px at 88% -10%, color-mix(in srgb, var(--verde-400) 26%, transparent), transparent 62%),
-    linear-gradient(135deg, #1a9540, #22b14c 30%, #00a2e8 72%, #13346a);
+    linear-gradient(135deg, #1d4ed8, #2563eb 30%, #00a2e8 72%, #13346a);
   color: #fff;
   border-radius: var(--raio-g);
   padding: clamp(1.6rem, 1rem + 3vw, 3rem);
