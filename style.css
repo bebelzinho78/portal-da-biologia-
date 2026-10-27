@@ -926,3 +926,9 @@ a.cartao-assunto:hover p, a.cartao-assunto:hover h3 { text-decoration: none; }
   body { background: #fff; color: #000; }
   .artigo, .pergunta, .cartao-assunto { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
 }
+.logo-escola {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+}
